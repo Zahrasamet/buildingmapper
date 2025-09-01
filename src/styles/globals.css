@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* اعمال فونت و رنگ دلخواه با استفاده از کلاس Tailwind سفارشی */
+body {
+  font-family: theme('fontFamily.secondary');
+  color: theme('colors.secondary');
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: theme('fontFamily.primary');
+  color: theme('colors.primary');
+}
+
+.h1 {
+  @apply text-[40px] xl:text-[50px] uppercase font-black leading-[1.1];
+}
+
+.h2 {
+  @apply text-[36px] capitalize font-bold leading-[1.3] xl:text-[46px] xl:leading-[1.56];
+}
+
+.h3 {
+  @apply font-primary font-bold text-3xl;
+}
+
+.h4 {
+  @apply font-semibold text-2xl;
+}
