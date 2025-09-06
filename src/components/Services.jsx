@@ -1,8 +1,21 @@
+"use client";
+
+import { useState } from "react";
+import {
+  PiRssFill,
+  PiPaintRollerFill,
+  PiWrenchFill,
+  PiUserGearFill,
+} from "react-icons/pi";
+import * as Tabs from "@radix-ui/react-tabs";
+import Image from "next/image";
+import Button from "./Button";
+import Pretitle from "./Pretitle";
 
 const serviceData = [
   {
     name: "construction",
-    icon: <PiRallFill />,
+    icon: <PiRssFill />,
     title: "Construction Services",
     description: `We build with precision and innovation, ensuring that every structure is strong,
     reliable, and built to last. From foundations to finishing touches, our expertise
@@ -10,82 +23,177 @@ const serviceData = [
     serviceList: [
       "Residential Builds",
       "Structural Design",
-      "Site Prep",
+      "Site Preparation",
       "Concrete Work",
       "Framing & Roofing",
-      "Interior Finish"
+      "Interior Finish",
     ],
-    thembs: [
+    thumbs: [
       { url: "/assets/img/services/thumb-1.jpg" },
-      { url: "/assets/img/services/thumb-2.jpg" }
-    ]
+      { url: "/assets/img/services/thumb-2.jpg" },
+    ],
   },
 
   {
     name: "renovation",
-    icon: <PiPaintRollerFill/>,
+    icon: <PiPaintRollerFill />,
     title: "Renovation Services",
-    description: `Revitalizing space with modern design and high-quality craftsmanship.
-    Whathar uppreding a home or remodeling an office,  we bring fresh life to every project `,
+    description: `Revitalizing spaces with modern design and high-quality craftsmanship.
+    Whether upgrading a home or remodeling an office, we bring fresh life to every project.`,
     serviceList: [
       "Kitchen Remodeling",
       "Basement Finish",
       "Flooring",
       "Energy Upgrades",
-      'Carpentry',
-      "Painting"
+      "Carpentry",
+      "Painting",
     ],
-    thembs: [
+    thumbs: [
       { url: "/assets/img/services/thumb-3.jpg" },
-      { url: "/assets/img/services/thumb-4.jpg" }
-    ]
-  },
-
-   {
-    name: "restoration",
-    icon: <PiWrenchFill/>,
-    title: "Renovation Services",
-    description:  `Bringing donaged or aging structures back to life. We specialize in restoring
-    historical landmarks, firm-damaged buildings, and water-domoged propertion with meticulous care`,
-    serviceList: [
-      "Historic Restore",
-      "Water Danage",
-      "Firm Repair",
-      "Structural Fix",
-      'Mold Removal',
-      "Roof Restre"
-    ],
-    thembs: [
       { url: "/assets/img/services/thumb-4.jpg" },
-      { url: "/assets/img/services/thumb-5.jpg" }
-    ]
+    ],
   },
 
-     {
-    name: "consulting",
-    icon: <PiUserGearFill/>,
-    title: "Consulting Services",
-    description:  `Providing export guidance for construction and renovation project from planning and budgeting
-    to complince and sustainability, our consulting service ensure project success `,
+  {
+    name: "restoration",
+    icon: <PiWrenchFill />,
+    title: "Restoration Services",
+    description: `Bringing damaged or aging structures back to life. We specialize in restoring
+    historical landmarks, fire-damaged buildings, and water-damaged properties with meticulous care.`,
     serviceList: [
-      "Project Plans",
+      "Historic Restoration",
+      "Water Damage Repair",
+      "Fire Repair",
+      "Structural Fix",
+      "Mold Removal",
+      "Roof Restore",
+    ],
+    thumbs: [
+      { url: "/assets/img/services/thumb-5.jpg" },
+      { url: "/assets/img/services/thumb-6.jpg" },
+    ],
+  },
+
+  {
+    name: "consulting",
+    icon: <PiUserGearFill />,
+    title: "Consulting Services",
+    description: `Providing expert guidance for construction and renovation projects — from planning
+    and budgeting to compliance and sustainability. Our consulting services ensure project success.`,
+    serviceList: [
+      "Project Planning",
       "Costing",
       "Site Management",
       "Permits",
-      'Sustainability',
-      "Safety"
+      "Sustainability",
+      "Safety",
     ],
     thumbs: [
       { url: "/assets/img/services/thumb-4.jpg" },
-      { url: "/assets/img/services/thumb-5.jpg" }
-    ]
+      { url: "/assets/img/services/thumb-3.jpg" },
+    ],
   },
 ];
 
 function Services() {
+  const [activeTab, setActiveTab] = useState("construction");
+  const currentItem = serviceData.find((i) => i.name === activeTab);
+
   return (
-    <div className='h-screen bg-green-200' id='services'>Services</div>
-  )
+    <section className="pt-16 xl:pt-32">
+      <div className="container mx-auto">
+        <div className="text-center max-w-[540px] mx-auto mb-20">
+          <Pretitle text="Our Services" center />
+          <h2 className="h2 mb-3">Solutions We Provide</h2>
+          <p className="mb-11 max-w-[400px] mx-auto">
+            Offering tailored construction solutions, from planning to
+            completion, with a focus on quality and innovation.
+          </p>
+        </div>
+
+        <Tabs.Root
+          defaultValue="construction"
+          onValueChange={(value) => setActiveTab(value)}
+          className="flex flex-col xl:flex-row w-full gap-[30px]"
+        >
+          {/* لیست تب‌ها */}
+          <Tabs.List
+            className="grid w-full grid-cols-1 md:grid-cols-2 xl:grid-cols-1
+          gap-[30px] h-full rounded-none p-0 bg-transparent xl:w-[345px]"
+          >
+            {serviceData.map((item) => (
+              <Tabs.Trigger
+                key={item.name}
+                value={item.name}
+                className="w-full rounded-none h-[100px] flex items-center relative shadow-custom p-0 outline-none"
+              >
+                <div
+                  className={`w-[100px] h-[100px] flex items-center justify-center
+               absolute left-0 ${
+                 activeTab === item.name
+                   ? "bg-primary text-white"
+                   : "bg-accent text-primary"
+               }`}
+                >
+                  <div className="text-4xl">{item.icon}</div>
+                </div>
+
+                <div
+                  className="uppercase font-primary text-base font-semibold
+               tracking-[.6px] w-[100px] ml-16"
+                >
+                  {item.name}
+                </div>
+              </Tabs.Trigger>
+            ))}
+          </Tabs.List>
+
+          {/* بخش محتوای تب‌ها */}
+          <div className="flex-1 bg-white shadow-custom h-[490px] p-[30px]">
+            {serviceData.map((item) => (
+              <Tabs.Content key={item.name} value={item.name} className="m-0">
+                <div className="flex md:flex-row gap-[30px]">
+                  <div className="flex md:flex-col gap-5 xl:gap-[30px]">
+                    {item.thumbs.map((thumbs, index) => (
+                      <div
+                        key={index}
+                        className="relative w-[140px] xl:w-[200px] h-[140px] xl:h-[200px]"
+                      >
+                        <Image src={thumbs.url} fill alt="" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Tabs.Content>
+            ))}
+          </div>
+
+          {/* جزئیات سرویس فعال */}
+          <div>
+            {currentItem && (
+              <div>
+                <h3 className="h3 mb-6">{currentItem.title}</h3>
+                <p className="mb-10">{currentItem.description}</p>
+
+                <ul className="grid grid-cols-2 gap-4 mb-12">
+                  {currentItem.serviceList.map((service, index) => (
+                    <li key={index} className="flex items-center gap-4">
+                      <div className="w-[6px] h-[6px] bg-accent"></div>
+                      <div className="capitalize font-medium text-primary">
+                        {service}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+
+                <Button text="Read more"/>
+              </div>
+            )}
+          </div>
+        </Tabs.Root>
+      </div>
+    </section>
+  );
 }
 
-export default Services
+export default Services;
