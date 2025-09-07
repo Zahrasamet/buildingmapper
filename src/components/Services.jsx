@@ -89,7 +89,7 @@ const serviceData = [
       "Safety",
     ],
     thumbs: [
-      { url: "/assets/img/services/thumb-4.jpg" },
+      { url: "/assets/img/services/thumb-1.jpg" },
       { url: "/assets/img/services/thumb-3.jpg" },
     ],
   },
@@ -116,7 +116,7 @@ function Services() {
           onValueChange={(value) => setActiveTab(value)}
           className="flex flex-col xl:flex-row w-full gap-[30px]"
         >
-          {/* لیست تب‌ها */}
+          
           <Tabs.List
             className="grid w-full grid-cols-1 md:grid-cols-2 xl:grid-cols-1
           gap-[30px] h-full rounded-none p-0 bg-transparent xl:w-[345px]"
@@ -148,7 +148,7 @@ function Services() {
             ))}
           </Tabs.List>
 
-          {/* بخش محتوای تب‌ها */}
+        
           <div className="flex-1 bg-white shadow-custom h-[490px] p-[30px]">
             {serviceData.map((item) => (
               <Tabs.Content key={item.name} value={item.name} className="m-0">
@@ -168,7 +168,7 @@ function Services() {
             ))}
           </div>
 
-          {/* جزئیات سرویس فعال */}
+         
           <div>
             {currentItem && (
               <div>
