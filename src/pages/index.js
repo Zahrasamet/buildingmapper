@@ -53,7 +53,7 @@ function Home() {
       <Footer/>
 
 
-      <div className='h-[1000px]'></div>
+      {/* <div className='h-[1000px]'></div> */}
     </>
   );
 }
